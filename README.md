@@ -1,24 +1,69 @@
-# swamdroid
-SwamDroid is a Android Library to easily build mobile web apps using SWAM.
+# SwamDroid
 
-# MIT License
+SwamDroid is an Android library that simplifies the process of building Android applications as web applications using frameworks like SWAM. With SwamDroid, you can effortlessly establish asynchronous communication between web applications and the native device. Additionally, it provides a convenient way to create new native services that can be seamlessly utilized by your web applications.
 
-Copyright (c) 2023 Ian Starnes
+## Features
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+- **Web Application Integration:** SwamDroid enables you to build Android applications with the same paradigms and frameworks used in web application development, such as SWAM. This allows for easier code reuse and a consistent development experience.
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+- **Async Message Communication:** SwamDroid facilitates asynchronous message passing between web applications and the native device. You can effortlessly send and receive messages, enabling efficient and responsive communication channels.
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+- **Native Service Creation:** With SwamDroid, you can effortlessly create new native services that can be utilized by your web applications. This feature allows for the integration of powerful native functionality into your web-based Android applications.
+
+## Getting Started
+
+Follow the steps below to integrate SwamDroid into your Android project:
+
+1. **Add the SwamDroid Library:** Add the SwamDroid library to your project's dependencies. You can do this by including the following line in your app-level `build.gradle` file:
+
+   ```groovy
+   implementation 'io.swamtech.swamview:swamview:1.0.0'
+   ```
+
+2. **Initialize SwamDroid:** In your application's main activity or application class, initialize SwamDroid by calling the `initialize()` method. This sets up the necessary configurations for SwamDroid to function correctly.
+
+   ```java
+import com.example.swamdroid.SwamDroid;
+
+public class MainActivity extends SwamActivity {
+
+    @Override
+    protected void initSettings() {
+        this.url_active = this.broker.settings.optString("app_url", "file:///android_asset/apps/mobile/index.html");
+        this.url_offline = "file:///android_asset/offline.html";
+        // enable strict caching to save on network traffic
+        this.strictCaching = false;
+
+    }
+    @Override
+    protected void initHandlers() {
+
+        this.broker.addHandler("browser", new BrowserHandler(this.broker));
+        this.broker.addHandler("system", new SystemHandler(this.broker));
+
+    }
+
+}
+   ```
+
+3. **Utilize SwamDroid APIs:** You can now start utilizing the SwamDroid APIs in your application. Refer to the SwamDroid documentation for detailed instructions on how to send and receive async messages between web applications and the native device, as well as creating new native services.
+
+## Documentation
+
+For detailed documentation and usage instructions, please refer to the [SwamDroid Documentation](https://github.com/311labs/swamdroid/wiki).
+
+## Contributing
+
+We welcome contributions to SwamDroid! To contribute, please follow these guidelines:
+
+- Fork the repository and clone it to your local machine.
+- Create a new branch for your feature or bug fix.
+- Make your modifications and commit them with descriptive commit messages.
+- Push your branch to your forked repository.
+- Open a pull request in the main SwamDroid repository.
+
+Please refer to our [Contribution Guidelines](https://github.com/311labs/swamdroid/CONTRIBUTING.md) for more details.
+
+## License
+
+SwamDroid is released under the [MIT License](https://github.com/311labs/swamdroid/wiki/LICENSE).
